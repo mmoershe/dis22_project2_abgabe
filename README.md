@@ -1,5 +1,9 @@
 # dis22_project2_abgabe
 
+## Daten
+
+[Clusterdaten in Sciebo](https://th-koeln.sciebo.de/apps/files/?dir=/DIS22%20-%20Data/Cluster_results&fileid=911182124)
+
 ## Allgemeines zur Präsentation
 
 Er muss sehen: Was ist der jeweilige Anteil/Beitrag der Personen. 
