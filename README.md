@@ -6,7 +6,7 @@
 
 ## Allgemeines zur Präsentation
 
-Er muss sehen: Was ist der jeweilige Anteil/Beitrag der Personen. 
+Er muss sehen: Was ist der jeweilige Anteil/Beitrag der Personen.
 Auch das halt Fragen beantworten.
 ("Warum haben Sie das so und so gemacht?")
 
@@ -20,7 +20,7 @@ Er steht jetzt nicht mit der Uhr daneben, aber so als Idee!!!!
 
 ### Artefakte
 
-Die wollen Artefakte haben. 
+Die wollen Artefakte haben.
 Zum Beispiel Generatoren Scripte abgeben, als Abgabe. (Code oder Analysen)
 
 ## Ansätze
@@ -31,10 +31,10 @@ Zum Beispiel Generatoren Scripte abgeben, als Abgabe. (Code oder Analysen)
 ### 1. Fragesteller
 
 - Laut Kruff reicht hier ein regelbasierter Ansatz mit hardcoded Weights
-    - Wie viele haben ein Fragezeichen? 
-    - Verteilung der Frageworte am Anfang
-    - Länge 
-    - etc...
+  - Wie viele haben ein Fragezeichen?
+  - Verteilung der Frageworte am Anfang
+  - Länge
+  - etc...
 
 ### 2. Moderater Filter-Typ
 
