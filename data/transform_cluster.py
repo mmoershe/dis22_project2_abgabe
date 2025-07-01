@@ -14,6 +14,9 @@ for cluster_file in possible_cluster_files:
         os.path.join(CURRENT_DIRECTORY, cluster_file), delimiter="\t"
     )
     queries: pd.Series = pd.Series(data["query"])
+    formatted_lines = queries.apply(
+        lambda x: f"<s>[INST] Generate output: [/INST] {x} </s>"
+    )
 
     filename: str = cluster_file.replace(".tsv", ".txt")
-    queries.to_csv(filename, index=False, header=False)
+    formatted_lines.to_csv(filename, index=False, header=False)
