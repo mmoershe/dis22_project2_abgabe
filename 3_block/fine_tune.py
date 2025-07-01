@@ -28,6 +28,15 @@ def _():
 
 
 @app.cell
+def _(torch):
+    print(torch.cuda.is_available())
+    print(torch.cuda.device_count())
+    print(torch.cuda.current_device())
+    print(torch.cuda.get_device_name(torch.cuda.current_device()))
+    return
+
+
+@app.cell
 def _(load_dataset, os):
     CURRENT_DIRECTORY: str = os.path.dirname(__file__)
     ROOT_DIRECTORY: str = os.path.dirname(CURRENT_DIRECTORY)
