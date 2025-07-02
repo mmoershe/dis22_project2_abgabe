@@ -13,6 +13,9 @@ def _():
     from trl import SFTTrainer, SFTConfig
 
     import os
+
+    import os
+    os.putenv("HIP_VISIBLE_DEVICES", "0") 
     return (
         AutoModelForCausalLM,
         AutoTokenizer,
@@ -68,6 +71,7 @@ def _(BitsAndBytesConfig, torch):
         bnb_4bit_compute_dtype=torch.float16,
         bnb_4bit_use_double_quant=True
     )
+    print("hallo")
     return
 
 
@@ -80,6 +84,7 @@ def _(AutoModelForCausalLM, base_model_name, torch):
         torch_dtype=torch.float16
     )
     model.config.use_cache = False
+    print("hallo")
     return (model,)
 
 
@@ -92,6 +97,7 @@ def _(LoraConfig):
         bias="none",
         task_type="CAUSAL_LM"
     )
+    print("hallo")
     return (lora_config,)
 
 
@@ -105,6 +111,7 @@ def _(TrainingArguments):
         fp16=True,
         output_dir="./output",
     )
+    print("hallo")
     return
 
 
@@ -121,6 +128,7 @@ def _(SFTConfig):
         max_seq_length=512,         # <-- SFT-specific!
         packing=False
     )
+    print("hallo")
     return (sft_config,)
 
 
