@@ -2,7 +2,7 @@ import random
 import numpy as np
 from simiir.user.query_generators.base import BaseQueryGenerator
 
-class QuestionFormQueryGenerator(BaseQueryGenerator):
+class AdvancedQuestionQueryGenerator(BaseQueryGenerator):
     """
     Query-Generator basierend auf Wahrscheinlichkeiten und POS-Mustern,
     der Fragen mit variablem Satzbau generiert.
@@ -37,23 +37,24 @@ class QuestionFormQueryGenerator(BaseQueryGenerator):
             "SCONJ PART VERB ADJ NOUN NOUN": 0.0560,
         }
 
-        # Dummy Wörter passend zu POS - hier für Demo, kann erweitert werden
+         # Realistische Dummy-Wörter pro POS-Tag
         self.dummy_words = {
-            "SPACE": " ",
-            "DET": "the",
-            "NOUN": "topic",
-            "VERB": "affect",
-            "PART": "to",
-            "ADP": "in",
-            "PRON": "it",
-            "AUX": "is",
-            "PROPN": "John",
-            "CCONJ": "and",
-            "SCONJ": "because",
-            "ADJ": "important",
-            "PUNCT": ".",
-            "NUM": "two"
+            "ADJ": ['academic', 'financial', 'social', 'teenage', 'short', 'genital', 'senior', 'high', 'personal', 'cultural'],
+            "NOUN": ['students', 'school', 'media', 'effects', 'regulations', 'corporation', 'literacy', 'experience', 'impact', 'grade'],
+            "PROPN": ['yearpublished<=2025', 'philippines', 'high', 'school', 'senior', 'yearpublished>=2018', 'egypt', 'social', 'thailand', 'yearpublished>=2020'],
+            "VERB": ['learning', 'discussing', 'assessing', 'understanding', 'lived', 'encounter', 'related', 'love', 'ai', 'calling'],
+            "NUM": ['yearpublished<=2024', '11', '2024', '2020', '2018', '2015', '5', '9'],
+            "SPACE": [' '],
+            "DET": ['the'],
+            "PRON": ['oneself'],
+            "AUX": ['is'],
+            "CCONJ": ['and'],
+            "ADP": ['in'],
+            "PUNCT": ['.'],
+            "PART": ['to'],
+            "SCONJ": ['how', 'because', 'although']
         }
+
 
     def weighted_choice(self, choices):
         items = list(choices.items())
