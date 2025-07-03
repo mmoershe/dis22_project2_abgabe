@@ -32,7 +32,7 @@ def _(AutoModelForCausalLM, AutoTokenizer, PeftModel, lora_adapter_dir: str):
     base_model = AutoModelForCausalLM.from_pretrained(base_model_path)
 
     # Load LoRA adapters onto the base model
-    model = PeftModel.from_pretrained(base_model, lora_adapter_dir)
+    model = PeftModel.from_pretrained(base_model, lora_adapter_dir).to("cuda")
 
     # Prompt the model
     prompt = "'What is climate change?', Output:"
