@@ -4,7 +4,7 @@ import json
 CURRENT_DIR: str = os.path.dirname(__file__)
 SUBMISSIONS_DIRECTORIES: list[str] = ["1_frage", "2_filter", "3_block"]
 
-TEAM_NAME: str = "MaRi"
+TEAM_NAME: str = "The Query Lab"
 
 for submission_dir in SUBMISSIONS_DIRECTORIES:
     output_dir: str = os.path.join(CURRENT_DIR, submission_dir, "output")
