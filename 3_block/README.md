@@ -28,8 +28,9 @@ This is a great way to balance the inferior hardware at hand.
 Training and generation was done on an **AMD RX 7800XT (_16GB of Vram_)** on **Arch Linux** / **Ubuntu 24.04.02**, using **ROCm 6.4** and the **PyTorch Nightly** version to match the ROCm version.
 We used Meta's **Llama3.2 (3B)** as our base model, because it's relatively new, very small in size, yet powerful (enough).
 
-The cluster of queries we trained our model on had to be converted to a "question-answer" structure.
-This way a _Keyphrase_ was introduced in training, which the model recognizes before generating an answer that is based on the LoRA training.
+In preparation for the training, the cluster of queries had to be converted to a "question - answer" structure.
+We ended up with a total of _2610_ "question - answer" pairs, where we simply used "Output:" as the 'question' every time.
+Thus a _Keyphrase_ was introduced in training, which the model recognizes before generating an answer that is based on the LoRA training.
 This is the reason our prompt is structured like this:
 
 ```python
@@ -40,4 +41,10 @@ prompt: str = f"{query}. {keyphrase}"
 # Example Prompt:
 climate change misinforatmion wildfires. Output:
 ```
+
+Despite the small amount of training data, the results were surprisingly convincing.
+At first glance, the fine-tuned model was actually using the aspired boolean block structure, while also adding related and meaningful terms, often expanding the query significantly.
+However, upon closer examination, logical errors in the boolean block structure become incredibly apparent, especially towards the end of the generated response, where the query abruptly ends or parenthesis are plainly missing.
+As mentioned before, the model is small, yet already powerful, and adds meaningful terms, articulating a great understanding of the prompt and its topics.
+The real gains will come from better fine-tuning and more training data.
 
