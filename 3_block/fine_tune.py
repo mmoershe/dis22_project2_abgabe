@@ -7,23 +7,21 @@ app = marimo.App(width="medium")
 @app.cell
 def _():
     import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer
+    from peft import LoraConfig, get_peft_model, TaskType
     from datasets import load_dataset
-    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments
-    from peft import LoraConfig
-    from trl import SFTTrainer, SFTConfig
 
     import os
 
-    import os
     os.putenv("HIP_VISIBLE_DEVICES", "0") 
     return (
         AutoModelForCausalLM,
         AutoTokenizer,
-        BitsAndBytesConfig,
         LoraConfig,
-        SFTConfig,
-        SFTTrainer,
+        TaskType,
+        Trainer,
         TrainingArguments,
+        get_peft_model,
         load_dataset,
         os,
         torch,
@@ -45,108 +43,89 @@ def _(load_dataset, os):
     ROOT_DIRECTORY: str = os.path.dirname(CURRENT_DIRECTORY)
     DATA_DIRECTORY: str = os.path.join(ROOT_DIRECTORY, "data")
     cluster2_DIRECTORY: str = os.path.join(DATA_DIRECTORY, "cluster2.jsonl")
+    model_DIRECTORY: str = os.path.join(DATA_DIRECTORY, "model-00002-of-00002.safetensors")
 
     assert os.path.exists(cluster2_DIRECTORY), f"Unable to find cluster2 at {cluster2_DIRECTORY = }"
+    assert os.path.exists(model_DIRECTORY), f"Unable to find model at {model_DIRECTORY = }"
 
     dataset = load_dataset("json", data_files=cluster2_DIRECTORY, split="train")
+    print(dataset)
     return (dataset,)
 
 
 @app.cell
-def _(AutoTokenizer):
-    # Model and tokenizer
-    base_model_name = "NousResearch/Llama-2-7b-chat-hf"
-    tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+def _(AutoModelForCausalLM, AutoTokenizer, torch):
+    # Load model and tokenizer
+    # model_name = "NousResearch/Llama-2-7b-chat-hf" 
+    model_name = "meta-llama/Llama-3.2-3B"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = "right"
-    return (base_model_name,)
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
+    return model, tokenizer
 
 
 @app.cell
-def _(BitsAndBytesConfig, torch):
-    # QLoRA quantization config
-    quant_config = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype=torch.float16,
-        bnb_4bit_use_double_quant=True
-    )
-    print("hallo")
-    return
+def _(
+    LoraConfig,
+    TaskType,
+    Trainer,
+    TrainingArguments,
+    dataset,
+    get_peft_model,
+    model,
+    tokenizer,
+):
+    def preprocess(example):
+        # Concatenate instruction and output as prompt + response
+        text = example["instruction"] + example["output"]
+        tokenized = tokenizer(
+            text,
+            truncation=True,
+            max_length=512,
+            padding="max_length"
+        )
+        # For causal LM, labels are usually the same as input_ids
+        tokenized["labels"] = tokenized["input_ids"].copy()
+        return tokenized
 
+    tokenized_dataset = dataset.map(preprocess, batched=False)
 
-@app.cell
-def _(AutoModelForCausalLM, base_model_name, torch):
-    model = AutoModelForCausalLM.from_pretrained(
-        base_model_name,
-        # quantization_config=quant_config,
-        device_map="auto", 
-        torch_dtype=torch.float16
-    )
-    model.config.use_cache = False
-    print("hallo")
-    return (model,)
-
-
-@app.cell
-def _(LoraConfig):
+    # LoRA configuration
     lora_config = LoraConfig(
-        r=8,
-        lora_alpha=32,
+        r=16,
+        lora_alpha=16,
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
         lora_dropout=0.05,
         bias="none",
-        task_type="CAUSAL_LM"
+        task_type=TaskType.CAUSAL_LM,
     )
-    print("hallo")
-    return (lora_config,)
 
+    # Apply LoRA to the model
+    lora_model = get_peft_model(model, lora_config)
 
-@app.cell
-def _(TrainingArguments):
+    # Training arguments
     training_args = TrainingArguments(
-        per_device_train_batch_size=4,
-        gradient_accumulation_steps=2,
-        num_train_epochs=3,
+        output_dir="./llama-lora-finetuned",
+        per_device_train_batch_size=1,
+        gradient_accumulation_steps=4,
+        num_train_epochs=2,
         learning_rate=2e-4,
         fp16=True,
-        output_dir="./output",
-    )
-    print("hallo")
-    return
-
-
-@app.cell
-def _(SFTConfig):
-    sft_config = SFTConfig(
-        output_dir="./output",
-        per_device_train_batch_size=4,
-        gradient_accumulation_steps=2,
-        num_train_epochs=3,
-        learning_rate=2e-4,
-        fp16=True,
-        dataset_text_field="text",  # <-- SFT-specific!
-        max_seq_length=512,         # <-- SFT-specific!
-        packing=False
-    )
-    print("hallo")
-    return (sft_config,)
-
-
-@app.cell
-def _(SFTTrainer, dataset, lora_config, model, sft_config):
-    # If your dataset has "instruction" and "output", combine them:
-    def formatting_func(example):
-        return f"Instruction: {example['instruction']}\nOutput: {example['output']}"
-
-    # Add a "text" field to your dataset
-    formatted_dataset = dataset.map(lambda x: {"text": formatting_func(x)})
-    trainer = SFTTrainer(
-        model=model,
-        train_dataset=formatted_dataset,
-        args=sft_config,
-        peft_config=lora_config,
+        logging_steps=10,
+        save_steps=100,
+        save_total_limit=2,
+        report_to="none"
     )
 
+    # Trainer
+    trainer = Trainer(
+        model=lora_model,
+        args=training_args,
+        train_dataset=tokenized_dataset,
+        tokenizer=tokenizer,
+    )
+
+    # Start fine-tuning
     trainer.train()
     return
 
