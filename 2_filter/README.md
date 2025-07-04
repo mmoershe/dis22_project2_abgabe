@@ -1,4 +1,4 @@
-# Submission 3 - Finetuned Block LLM
+# Submission 2 - Finetuned Filter LLM
 
 ## Files
 
