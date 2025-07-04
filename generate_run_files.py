@@ -40,7 +40,7 @@ for submission_dir in SUBMISSIONS_DIRECTORIES:
             "team_name": TEAM_NAME,
             "approach_description": "Llama finetuned on human boolean block method",
             "task": "Task_A1",
-            "run_name": "finteund_llm_block",
+            "run_name": "finetuned_llm_block",
         }
 
     run_file: dict = dict()
