@@ -1,0 +1,11 @@
+Short articles about corporation discussing about their rules and regulations
+corporation rules AND (yearPublished>=1975 AND yearPublished<=2024)
+corporation AND (yearPublished>=2018 AND yearPublished<=2024)
+corporation AND (yearPublished>=1974 AND yearPublished<=2024)
+corporation AND (yearPublished>=1990 AND yearPublished<=2024)
+corporate governance AND (yearPublished>=2009 AND yearPublished<=2025)
+corporation AND (yearPublished>=1980 AND yearPublished<=2025)
+corporate governance AND (yearPublished>=2012 AND yearPublished<=2024)
+corporation AND (yearPublished>=2010 AND yearPublished<=2024)
+corporate governance AND (yearPublished>=2010 AND yearPublished<=2024)
+corporation rules and regulations AND (yearPublished>=1996 AND yearPublished<=2025)

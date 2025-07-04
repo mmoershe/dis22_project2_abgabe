@@ -1,0 +1,11 @@
+school dress code
+school dress code AND (yearPublished>=1968 AND yearPublished<=2025)
+School Dress Code AND (yearPublished>=2000 AND yearPublished<=2024)
+student dress code AND (yearPublished>=1994 AND yearPublished<=2024)
+student behavior AND (yearPublished>=2006 AND yearPublished<=2024)
+student motivation AND (yearPublished>=2010 AND yearPublished<=2025)
+student AND (yearPublished>=1999 AND yearPublished<=2024)
+students AND (yearPublished>=2005 AND yearPublished<=2025)
+school dress code AND (yearPublished>=2010 AND yearPublished<=2024)
+School Dress Code AND (yearPublished>=1997 AND yearPublished<=2024)
+student dress code AND (yearPublished>=2015 AND yearPublished<=2025)
