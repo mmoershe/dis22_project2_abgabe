@@ -3,7 +3,7 @@
         "team_name": "MaRi",
         "approach_description": "Llama finetuned on human boolean block method",
         "task": "Task_A1",
-        "run_name": "llm_block"
+        "run_name": "finteund_llm_block"
     },
     "1": [
         "(\"Female genital mutilation\" OR \"female circumcision\" OR \"female genital cutting\" OR \"female circumcision - surgical\" OR \"female genital mutilation - surgical\" OR \"female genital cutting - surgical\" OR \"clitoridectomy\" OR \"partial clitoridectomy\" OR \"clitoral surgery\" OR \"clitoral amputation\" OR \"hypnoid metrodexy\" OR \"pharyngeal splitting\" OR \"infibulation\" OR \"infibulation",
