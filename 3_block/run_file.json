@@ -1,6 +1,6 @@
 {
     "meta": {
-        "team_name": "MaRi",
+        "team_name": "The Query Lab",
         "approach_description": "Llama finetuned on human boolean block method",
         "task": "Task_A1",
         "run_name": "finteund_llm_block"

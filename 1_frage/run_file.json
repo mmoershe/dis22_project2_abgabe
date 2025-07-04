@@ -1,6 +1,6 @@
 {
     "meta": {
-        "team_name": "MaRi",
+        "team_name": "The Query Lab",
         "approach_description": "sophisticated questions generator based off of human question characteristics",
         "task": "Task_A1",
         "run_name": "weighted_question"
