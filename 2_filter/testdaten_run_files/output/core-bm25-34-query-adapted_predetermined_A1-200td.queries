@@ -1,0 +1,10 @@
+NEO Five Factor Inventory
+psychosis AND (yearPublished>=1959 AND yearPublished<=2024)
+psychology AND (yearPublished>=2016 AND yearPublished<=2024)
+Relationship between personality traits and academic performance in students.
+Personality AND (yearPublished>=1995 AND yearPublished<=2024)
+health AND (yearPublished>=2002 AND yearPublished<=2025)
+Psychological wellbeing and resilience in students AND (yearPublished>=1990 AND yearPublished<=2025)
+personality AND (yearPublished>=2011 AND yearPublished<=2025)
+Personality AND (yearPublished>=1984 AND yearPublished<=2024)
+parent education AND (yearPublished>=2009 AND yearPublished<=2025)

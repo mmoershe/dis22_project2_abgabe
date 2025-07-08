@@ -1,0 +1,13 @@
+pharmacognostic studies on leaf samples
+leaves AND (yearPublished>=2019 AND yearPublished<=2025)
+phyton AND (yearPublished>=2013 AND yearPublished<=2024)
+pharmacognostic AND (yearPublished>=1969 AND yearPublished<=2024)
+bioprospecting of medicinal plants AND (yearPublished>=2019 AND yearPublished<=2025)
+leprosy AND (yearPublished>=1994 AND yearPublished<=2025)
+Pharmacognostic studies on leaf samples AND (yearPublished>=2001 AND yearPublished<=2024)
+botanical AND (yearPublished>=1958 AND yearPublished<=2024)
+leprosy AND (yearPublished>=2011 AND yearPublished<=2025)
+phytochemical AND (yearPublished>=1972 AND yearPublished<=2025)
+pharmacognostic AND (yearPublished>=1955 AND yearPublished<=2025)
+pharmacognostic AND (yearPublished>=2017 AND yearPublished<=2025)
+Therapeutic potentials of leaves AND (yearPublished>=2008 AND yearPublished<=2025)

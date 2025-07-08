@@ -1,0 +1,11 @@
+school contribution 
+ducation expenses AND (yearPublished>=2012 AND yearPublished<=2025)
+tudent contribution AND (yearPublished>=2016 AND yearPublished<=2024)
+inancial literacy AND (yearPublished>=2018 AND yearPublished<=2025)
+cademic performance AND (yearPublished>=2010 AND yearPublished<=2024)
+tudent performance AND (yearPublished>=1950 AND yearPublished<=2025)
+mportance of school contribution in education AND (yearPublished>=2014 AND yearPublished<=2025)
+inancial literacy AND (yearPublished>=1959 AND yearPublished<=2025)
+inancial literacy AND (yearPublished>=2015 AND yearPublished<=2025)
+mportance of school contribution for students financial well being AND yearPublished>=2023 AND yearPublished<=2025
+inancial literacy AND (yearPublished>=2013 AND yearPublished<=2025)

@@ -1,0 +1,11 @@
+Assessing stem strand and the performance of the students in math and science
+ stem strand AND (yearPublished>=2004 AND yearPublished<=2025)
+ stem strand AND (yearPublished>=1995 AND yearPublished<=2025)
+stem strand AND (yearPublished>=1950 AND yearPublished<=2024)
+stem strand AND (yearPublished>=2000 AND yearPublished<=2025)
+the influence of the socio economic status in the performance of the students in math and science.
+ stem strand AND (yearPublished>=2015 AND yearPublished<=2024)
+ STEM Strand AND (yearPublished>=1998 AND yearPublished<=2025)
+stem strand AND (yearPublished>=2000 AND yearPublished<=2024)
+stem strand AND (yearPublished>=2006 AND yearPublished<=2024)
+stem strand AND (yearPublished>=2005 AND yearPublished<=2025)
